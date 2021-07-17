@@ -5,7 +5,7 @@ $database_config = [
     "database" => "slim_api",
     "username" => "user",
     "password" => "pass",
-    "charset" => "uft8",
+    "charset" => "utf8",
     "collation" => "utf8_unicode_ci",
     "prefix" => ""
 ];
