@@ -48,5 +48,39 @@ class GuestEntryController
         return $this->customResponse->is200Response($response, $responseMessage);
     }
 
+    public function viewGuests(Response $response)
+    {
+        $guestEntries = $this->guestEntry->get();
+        return $this->customResponse->is200Response($response, $guestEntries);
+    }
+
+    public function editGuest(Request $request, Response $response, $id)
+    {
+        $this->validator->validate($request, [
+            'name' => v::notEmpty(),
+            'email' => v::notEmpty()->email(),
+            'comments' => v::notEmpty()
+        ]);
+
+        if ($this->validator->failed()) {
+            $responseMessage = $this->validator->errors;
+            return $this->customResponse->is400Response($response, $responseMessage);
+        }
+        $this->guestEntry->where(["id" => $id])->update([
+            'full_name' => CustomRequestHandler::getParam($request, 'name'),
+            'email' => CustomRequestHandler::getParam($request, 'email'),
+            'comment' => CustomRequestHandler::getParam($request, 'comments')
+        ]);
+
+        $responseMessage = "Успешно внесены изменения";
+        return $this->customResponse->is200Response($response, $responseMessage);
+    }
+
+    public function deleteGuest(Response $response, $id)
+    {
+        $this->guestEntry->where(['id'=> $id])->delete();
+        $responseMessage = "Гость удален";
+        return $this->customResponse->is200Response($response, $responseMessage);
+    }
 
 }
