@@ -7,7 +7,8 @@
     "respect/validation": "^2.2",
     "tuupola/slim-jwt-auth": "^3.5",
     "firebase/php-jwt": "^5.4",
-    "illuminate/database": "^8.50"
+    "illuminate/database": "^8.50",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {

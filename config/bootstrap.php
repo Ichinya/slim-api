@@ -11,6 +11,7 @@ $settings = require_once __DIR__ . '/settings.php';
 $settings($container);
 
 $app = SlimAppFactory::create($container);
+$app->addBodyParsingMiddleware();
 
 $middleware = require_once __DIR__ . '/middleware.php';
 $middleware($app);

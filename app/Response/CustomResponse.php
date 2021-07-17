@@ -8,7 +8,7 @@ class CustomResponse
     {
         $responseMessage = json_encode(["success" => true, "response" => $responseMessage]);
         $response->getBody()->write($responseMessage);
-        return $response->withHeader('Contant-Type', "application/json")
+        return $response->withHeader('Content-Type', "application/json")
             ->withStatus(200);
     }
 
@@ -16,7 +16,7 @@ class CustomResponse
     {
         $responseMessage = json_encode(["success" => true, "response" => $responseMessage]);
         $response->getBody()->write($responseMessage);
-        return $response->withHeader('Contant-Type', "application/json")
+        return $response->withHeader('Content-Type', "application/json")
             ->withStatus(400);
     }
 
