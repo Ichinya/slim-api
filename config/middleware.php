@@ -7,6 +7,14 @@ return function (App $app) {
     $app->getContainer()->get('settings');
     $app->addRoutingMiddleware();
 
+	$app->add(function ($request, $handler) {
+		$response = $handler->handle($request);
+		return $response
+				->withHeader('Access-Control-Allow-Origin', '*')
+				->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+				->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+	});
+
     $app->add(
         new Tuupola\Middleware\JwtAuthentication([
             "ignore" => ["/auth/login", "/auth/register"],
